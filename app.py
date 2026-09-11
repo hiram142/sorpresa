@@ -1,4 +1,5 @@
 import streamlit as st
+import random
 
 # Inicializamos el contador en la memoria
 if "clics" not in st.session_state:
@@ -8,23 +9,34 @@ def sumar_clic():
     st.session_state.clics += 1
 
 st.markdown("## Tengo un mensaje para ti...")
-st.write("") # Espacio en blanco
 
-# Lógica de posiciones
-if st.session_state.clics == 0:
-    st.button("Haz clic aquí para leerlo", on_click=sumar_clic)
+# Lista de frases burlonas para el botón
+textos_boton = [
+    "Haz clic aquí para leerlo",
+    "Pícale otra vez",
+    "¡Casi!",
+    "Jajaja muy lenta, otra vez",
+    "¡Tu puedes!"
+]
 
-elif st.session_state.clics == 1:
-    col1, col2, col3 = st.columns(3)
-    with col2:  # Lo movemos al centro
-        st.button("Pícale otra vez", on_click=sumar_clic)
+# Si aún no llega a 5 clics, el botón salta
+if st.session_state.clics < 5:
+    
+    # 1. Movimiento vertical drástico 
+    saltos_verticales = random.randint(1, 15)
+    st.markdown(f"{'<br>' * saltos_verticales}", unsafe_allow_html=True)
+    
+    # 2. Movimiento horizontal 
+    columnas = st.columns(5)
+    columna_elegida = random.choice(columnas)
+    
 
-elif st.session_state.clics == 2:
-    col1, col2, col3, col4, col5 = st.columns(5)
-    with col5:  # Lo movemos hasta la extrema derecha
-        st.button("Casi", on_click=sumar_clic)
+    texto_actual = textos_boton[st.session_state.clics]
+    
+    with columna_elegida:
+        st.button(texto_actual, on_click=sumar_clic)
 
-elif st.session_state.clics >= 3:
+else:
     st.success("Hola pau, suerte en tu clase ")
     st.balloons()
     
