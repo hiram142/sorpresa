@@ -15,19 +15,19 @@ textos_boton = [
     "Haz clic aquí para leerlo",
     "Pícale otra vez",
     "¡Casi!",
-    "Jajaja muy lenta, otra vez",
-    "¡Tu puedes!"
+    "otra vez",
+    "Tu puedes"
 ]
 
 # Si aún no llega a 5 clics, el botón salta
 if st.session_state.clics < 5:
     
     # 1. Movimiento vertical drástico 
-    saltos_verticales = random.randint(1, 15)
+    saltos_verticales = random.randint(6, 15)
     st.markdown(f"{'<br>' * saltos_verticales}", unsafe_allow_html=True)
     
     # 2. Movimiento horizontal 
-    columnas = st.columns(5)
+    columnas = st.columns(10)
     columna_elegida = random.choice(columnas)
     
 
